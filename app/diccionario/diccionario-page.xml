@@ -58,13 +58,29 @@
         -->
         <nsDrawer:RadSideDrawer.mainContent>
     <StackLayout>
-        <ListView id="listview" separatorColor="transparent" items="{{ navigationItems }}" itemTap="onNavigationItemTap">
+    	<SearchBar row="0" hint="Search for a country and press enter" 
+    		(clear)="onClear($event)" (submit)="onSubmit($event)"></SearchBar>
+        <ListView row="1" id="listview" separatorColor="transparent" 
+        	class="list-group"
+        	items="{{ navigationItems }}" itemTap="onNavigationItemTap">
             <ListView.itemTemplate>
-                <GridLayout columns="auto, *" rows="50" 
-                    class="{{ 'sidedrawer-list-item sidedrawer-list-item-' + name + (isSelected ? ' selected':'') }}">
-                    <Label row="0" col="0" text="{{ icon }}" class="fa"/>
-                    <Label row="0" col="1" text="{{ title }}" textWrap="true"/>
-                </GridLayout>
+				<GridLayout columns="auto, *" rows="30, *" backgroundColor="red" >
+				
+					<GridLayout columns="auto, *" rows="40" backgroundColor="blue" colSpan="2" >
+						<Label text="My cat loves the camera" textWrap="true" col="0"
+							backgroundColor="lightgray"
+							minHeight="50" fontSize="16" margin="5" ></Label>
+						
+						<Label text="My cat loves the camera" textWrap="true" col="1" 
+							minHeight="50" fontSize="10" margin="3" ></Label>
+					</GridLayout>
+					
+					<!-- by default column and row are set to 0 -->
+					<Label text="Mirar la primera carta de la biblioteca y decidir entre, dejarla allí o enviarla al fondo de la misma."
+						colSpan="2" row="1" color="#10C2B0" fontSize="14" 
+						textWrap="true"
+						verticalAlignment="bottom" margin="3"></Label>
+				</GridLayout>
             </ListView.itemTemplate>
         </ListView>
     </StackLayout>
