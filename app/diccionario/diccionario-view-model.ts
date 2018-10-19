@@ -1,11 +1,81 @@
 import { Observable } from "data/observable";
+import { http2 } from "tns-core-modules/http";
 
 export class DiccionarioViewModel extends Observable {
 	private _navigationItems: Array<any>;
 	
+	private _titulo: String;
+	
+	
+	
     constructor() {
         super();
+        
+        var self = this;
+        
+        console.log("Prueba de construccion de data Diccionario");
+        
+/*        
+fetch("https://httpbin.org/post", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        username: vm.get("user"),
+        password: vm.get("pass")
+    })
+}).then((r) => r.json())
+    .then((response) => {
+        const result = response.json;
+    }).catch((e) => {
+    });
+*/
+
+        self._titulo = "XD response.diccionario.titulo";
+
+/*
+fetch("http://perrosky.cl/magic/diccionario.json")
+.then((response) => {
+        console.log("Retorno de datos desde Perrosky");
+        
+        this._navigationItems = response.diccionario.contenido;
+        this._titulo = "response.diccionario.titulo";
+        
+        response.forEach(function (value) {
+  			console.log('HIJO' + value);
+		});
 		
+		console.log( JSON.stringify(response) );
+	
+
+}).catch((e) => {
+	console.error("Y me cai de hocico");
+	console.error(e);
+});
+*/
+
+
+http.getJSON("http://perrosky.cl/magic/diccionario.json").then((response) => {
+
+	console.log("Retorno de datos desde Perrosky");
+	console.log( response.json );
+	console.log("Retorno de datos desde Perrosky - dos");
+	console.log( response.jsonp.diccionario.titulo );
+	
+	self._navigationItems = response.diccionario.contenido;
+	self._titulo = "response.diccionario.titulo";
+	
+	console.log("Retorno de datos desde Perrosky - fin");
+	
+}, (e) => {
+	console.error("Y me cai de hocico");
+	console.error(e);
+});
+
+
+   
+//        http://perrosky.cl/magic/diccionario.json
+
+/*	
         this._navigationItems = [
             {
                 title: "Casita",
@@ -17,199 +87,11 @@ export class DiccionarioViewModel extends Observable {
                 name: "browse",
                 route: "browse/browse-page",
                 icon: "\uf1ea",
-            },{
-                title: "Search",
-                name: "search",
-                route: "search/search-page",
-                icon: "\uf002",
-            },{
-                title: "Featured",
-                name: "featured",
-                route: "featured/featured-page",
-                icon: "\uf005",
-            },{
-                title: "Diccionario",
-                name: "diccionario",
-                route: "diccionario/diccionario-page",
-                icon: "\uf02d",
-            },{
-                title: "Settings",
-                name: "settings",
-                route: "settings/settings-page",
-                icon: "\uf013",
-            },{
-                title: "Casita",
-                name: "home",
-                route: "home/home-page",
-                icon: "\uf2cd",
-            },{
-                title: "Browse",
-                name: "browse",
-                route: "browse/browse-page",
-                icon: "\uf1ea",
-            },{
-                title: "Search",
-                name: "search",
-                route: "search/search-page",
-                icon: "\uf002",
-            },{
-                title: "Featured",
-                name: "featured",
-                route: "featured/featured-page",
-                icon: "\uf005",
-            },{
-                title: "Diccionario",
-                name: "diccionario",
-                route: "diccionario/diccionario-page",
-                icon: "\uf02d",
-            },{
-                title: "Settings",
-                name: "settings",
-                route: "settings/settings-page",
-                icon: "\uf013",
-            },{
-                title: "Casita",
-                name: "home",
-                route: "home/home-page",
-                icon: "\uf2cd",
-            },{
-                title: "Browse",
-                name: "browse",
-                route: "browse/browse-page",
-                icon: "\uf1ea",
-            },{
-                title: "Search",
-                name: "search",
-                route: "search/search-page",
-                icon: "\uf002",
-            },
-            {
-                title: "Featured",
-                name: "featured",
-                route: "featured/featured-page",
-                icon: "\uf005",
-            },
-            {
-                title: "Diccionario",
-                name: "diccionario",
-                route: "diccionario/diccionario-page",
-                icon: "\uf02d",
-            },			
-            {
-                title: "Settings",
-                name: "settings",
-                route: "settings/settings-page",
-                icon: "\uf013",
-            },
-            {
-                title: "Casita",
-                name: "home",
-                route: "home/home-page",
-                icon: "\uf2cd",
-            },
-            {
-                title: "Browse",
-                name: "browse",
-                route: "browse/browse-page",
-                icon: "\uf1ea",
-            },
-            {
-                title: "Search",
-                name: "search",
-                route: "search/search-page",
-                icon: "\uf002",
-            },
-            {
-                title: "Featured",
-                name: "featured",
-                route: "featured/featured-page",
-                icon: "\uf005",
-            },
-            {
-                title: "Diccionario",
-                name: "diccionario",
-                route: "diccionario/diccionario-page",
-                icon: "\uf02d",
-            },			
-            {
-                title: "Settings",
-                name: "settings",
-                route: "settings/settings-page",
-                icon: "\uf013",
-            },
-            {
-                title: "Casita",
-                name: "home",
-                route: "home/home-page",
-                icon: "\uf2cd",
-            },
-            {
-                title: "Browse",
-                name: "browse",
-                route: "browse/browse-page",
-                icon: "\uf1ea",
-            },
-            {
-                title: "Search",
-                name: "search",
-                route: "search/search-page",
-                icon: "\uf002",
-            },
-            {
-                title: "Featured",
-                name: "featured",
-                route: "featured/featured-page",
-                icon: "\uf005",
-            },
-            {
-                title: "Diccionario",
-                name: "diccionario",
-                route: "diccionario/diccionario-page",
-                icon: "\uf02d",
-            },			
-            {
-                title: "Settings",
-                name: "settings",
-                route: "settings/settings-page",
-                icon: "\uf013",
-            },
-            {
-                title: "Casita",
-                name: "home",
-                route: "home/home-page",
-                icon: "\uf2cd",
-            },
-            {
-                title: "Browse",
-                name: "browse",
-                route: "browse/browse-page",
-                icon: "\uf1ea",
-            },
-            {
-                title: "Search",
-                name: "search",
-                route: "search/search-page",
-                icon: "\uf002",
-            },
-            {
-                title: "Featured",
-                name: "featured",
-                route: "featured/featured-page",
-                icon: "\uf005",
-            },
-            {
-                title: "Diccionario",
-                name: "diccionario",
-                route: "diccionario/diccionario-page",
-                icon: "\uf02d",
-            },			
-            {
-                title: "Settings",
-                name: "settings",
-                route: "settings/settings-page",
-                icon: "\uf013",
             }
 		];
+*/
+		
+		
     }
 	
     public onSubmit(args) {
@@ -239,5 +121,9 @@ export class DiccionarioViewModel extends Observable {
 	
     get navigationItems(): Array<any> {
         return this._navigationItems;
+    }
+    
+    get titulo(): String {
+        return this._titulo;
     }
 }
